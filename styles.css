@@ -1,0 +1,132 @@
+:root {
+    --bg-color: #1a1a2e;
+    --calculator-bg: #16213e;
+    --display-bg: #0f0f23;
+    --btn-bg: #1f4068;
+    --btn-hover: #2d5a8a;
+    --operator-bg: #e94560;
+    --operator-hover: #ff6b6b;
+    --equals-bg: #4ecca3;
+    --equals-hover: #7fff9e;
+    --text-color: #ffffff;
+    --text-muted: #a0a0a0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-color);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.calculator {
+    background: var(--calculator-bg);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 350px;
+}
+
+.display {
+    background: var(--display-bg);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: right;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.previous-operand {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    min-height: 1.5em;
+}
+
+.current-operand {
+    color: var(--text-color);
+    font-size: 2.5rem;
+    font-weight: 300;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.btn {
+    border: none;
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    background: var(--btn-bg);
+    color: var(--text-color);
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn:hover {
+    background: var(--btn-hover);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn.operator {
+    background: var(--operator-bg);
+}
+
+.btn.operator:hover {
+    background: var(--operator-hover);
+}
+
+.btn.equals {
+    background: var(--equals-bg);
+    color: #1a1a2e;
+}
+
+.btn.equals:hover {
+    background: var(--equals-hover);
+}
+
+.span-two {
+    grid-column: span 2;
+}
+
+@media (max-width: 400px) {
+    .calculator {
+        margin: 10px;
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+    .btn {
+        padding: 18px;
+        font-size: 1.3rem;
+    }
+
+    .current-operand {
+        font-size: 2rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .calculator {
+        max-width: 380px;
+    }
+}
