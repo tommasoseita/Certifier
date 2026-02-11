@@ -3,40 +3,637 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calcolatrice</title>
+    <title>CertifyPro - Piattaforma Certificati Digitali</title>
+    <meta name="description" content="Crea, personalizza e invia certificati digitali professionali ai tuoi studenti. Condivisione LinkedIn integrata.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
 </head>
 <body>
-    <div class="calculator">
-        <div class="display">
-            <div class="previous-operand"></div>
-            <div class="current-operand">0</div>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                        <rect width="28" height="28" rx="8" fill="url(#logoGrad)"/>
+                        <path d="M8 14.5L12 18.5L20 10.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs><linearGradient id="logoGrad" x1="0" y1="0" x2="28" y2="28"><stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs>
+                    </svg>
+                </div>
+                <span class="logo-text">CertifyPro</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle menu">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
         </div>
-        <div class="buttons">
-            <button class="btn span-two" data-action="clear">AC</button>
-            <button class="btn" data-action="delete">DEL</button>
-            <button class="btn operator" data-action="operator" data-value="/">÷</button>
+        <nav class="sidebar-nav">
+            <a href="#dashboard" class="nav-item active" data-page="dashboard">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="2" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="11" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="11" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/></svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="#templates" class="nav-item" data-page="templates">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="2" width="14" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 6h6M7 9h6M7 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span>Template</span>
+            </a>
+            <a href="#designer" class="nav-item" data-page="designer">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M14.5 2.5l3 3L7 16H4v-3L14.5 2.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>Designer</span>
+            </a>
+            <a href="#recipients" class="nav-item" data-page="recipients">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="8" cy="6" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M2 17c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M15 6l2 2 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>Destinatari</span>
+            </a>
+            <a href="#send" class="nav-item" data-page="send">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 10l16-8-4 16-4-6-8-2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M18 2l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span>Invia</span>
+            </a>
+            <a href="#history" class="nav-item" data-page="history">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span>Storico</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="avatar">TS</div>
+                <div class="user-info">
+                    <span class="user-name">Tommaso Seita</span>
+                    <span class="user-role">Amministratore</span>
+                </div>
+            </div>
+        </div>
+    </aside>
 
-            <button class="btn" data-action="number" data-value="7">7</button>
-            <button class="btn" data-action="number" data-value="8">8</button>
-            <button class="btn" data-action="number" data-value="9">9</button>
-            <button class="btn operator" data-action="operator" data-value="*">×</button>
+    <!-- Mobile Header -->
+    <header class="mobile-header" id="mobileHeader">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <div class="logo">
+            <div class="logo-icon">
+                <svg width="24" height="24" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8" fill="url(#logoGrad2)"/><path d="M8 14.5L12 18.5L20 10.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="logoGrad2" x1="0" y1="0" x2="28" y2="28"><stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs></svg>
+            </div>
+            <span class="logo-text">CertifyPro</span>
+        </div>
+    </header>
 
-            <button class="btn" data-action="number" data-value="4">4</button>
-            <button class="btn" data-action="number" data-value="5">5</button>
-            <button class="btn" data-action="number" data-value="6">6</button>
-            <button class="btn operator" data-action="operator" data-value="-">−</button>
+    <!-- Overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-            <button class="btn" data-action="number" data-value="1">1</button>
-            <button class="btn" data-action="number" data-value="2">2</button>
-            <button class="btn" data-action="number" data-value="3">3</button>
-            <button class="btn operator" data-action="operator" data-value="+">+</button>
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
 
-            <button class="btn span-two" data-action="number" data-value="0">0</button>
-            <button class="btn" data-action="decimal" data-value=".">.</button>
-            <button class="btn equals" data-action="equals">=</button>
+        <!-- ==================== DASHBOARD ==================== -->
+        <section class="page active" id="page-dashboard">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Dashboard</h1>
+                    <p class="page-subtitle">Panoramica della tua attivita' di certificazione</p>
+                </div>
+                <button class="btn btn-primary" onclick="App.navigate('designer')">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    Nuovo Certificato
+                </button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-blue">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/><path d="M8 12l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="statTotal">0</span>
+                        <span class="stat-label">Certificati Emessi</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-green">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="statSent">0</span>
+                        <span class="stat-label">Email Inviate</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-purple">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M16 3.13a4 4 0 010 7.75M21 21v-2a4 4 0 00-3-3.87" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="statRecipients">0</span>
+                        <span class="stat-label">Destinatari</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-orange">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 01-8 5.65V21l3-3 3 3v-7.35A6 6 0 1116 8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="statTemplates">0</span>
+                        <span class="stat-label">Template Attivi</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Attivita' Recente</h3>
+                        <a href="#history" class="card-link" onclick="App.navigate('history')">Vedi tutto</a>
+                    </div>
+                    <div class="card-body" id="recentActivity">
+                        <div class="empty-state-sm">
+                            <p>Nessuna attivita' recente. Crea il tuo primo certificato!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Azioni Rapide</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="quick-actions">
+                            <button class="quick-action-btn" onclick="App.navigate('templates')">
+                                <div class="qa-icon qa-icon-blue">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="2" width="14" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 6h6M7 9h6M7 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </div>
+                                <span>Scegli Template</span>
+                            </button>
+                            <button class="quick-action-btn" onclick="App.navigate('recipients')">
+                                <div class="qa-icon qa-icon-green">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 13l4 4M2 8.5a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </div>
+                                <span>Importa CSV</span>
+                            </button>
+                            <button class="quick-action-btn" onclick="App.navigate('send')">
+                                <div class="qa-icon qa-icon-purple">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 10l16-8-4 16-4-6-8-2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                                </div>
+                                <span>Invia Certificati</span>
+                            </button>
+                            <button class="quick-action-btn" onclick="App.navigate('designer')">
+                                <div class="qa-icon qa-icon-orange">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M14.5 2.5l3 3L7 16H4v-3L14.5 2.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </div>
+                                <span>Crea Certificato</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TEMPLATES ==================== -->
+        <section class="page" id="page-templates">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Template Certificati</h1>
+                    <p class="page-subtitle">Scegli un template professionale per iniziare</p>
+                </div>
+            </div>
+            <div class="template-filters">
+                <button class="filter-btn active" data-filter="all">Tutti</button>
+                <button class="filter-btn" data-filter="completion">Completamento</button>
+                <button class="filter-btn" data-filter="excellence">Eccellenza</button>
+                <button class="filter-btn" data-filter="participation">Partecipazione</button>
+                <button class="filter-btn" data-filter="achievement">Traguardo</button>
+            </div>
+            <div class="templates-grid" id="templatesGrid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- ==================== DESIGNER ==================== -->
+        <section class="page" id="page-designer">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Designer Certificato</h1>
+                    <p class="page-subtitle">Personalizza il tuo certificato nei minimi dettagli</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-outline" onclick="CertDesigner.resetDesign()">Reset</button>
+                    <button class="btn btn-primary" onclick="CertDesigner.saveDesign()">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12 2H4a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2z" stroke="currentColor" stroke-width="1.5"/><path d="M10 2v3H6V2M6 14v-4h4v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        Salva Design
+                    </button>
+                </div>
+            </div>
+
+            <div class="designer-layout">
+                <div class="designer-sidebar">
+                    <div class="designer-section">
+                        <h3 class="section-title">Informazioni Certificato</h3>
+                        <div class="form-group">
+                            <label class="form-label">Titolo Certificato</label>
+                            <input type="text" class="form-input" id="certTitle" value="Certificato di Completamento" placeholder="Es: Certificato di Eccellenza">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Sottotitolo</label>
+                            <input type="text" class="form-input" id="certSubtitle" value="Si certifica che" placeholder="Es: Si attesta che">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Nome Corso / Programma</label>
+                            <input type="text" class="form-input" id="certCourse" value="Corso Avanzato di Web Development" placeholder="Es: Master in Data Science">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Descrizione</label>
+                            <textarea class="form-input form-textarea" id="certDescription" rows="3" placeholder="Descrizione opzionale...">ha completato con successo tutte le lezioni e gli esami previsti dal programma formativo.</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Organizzazione / Istituto</label>
+                            <input type="text" class="form-input" id="certOrg" value="CertifyPro Academy" placeholder="Es: Universita' degli Studi">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Firmato da</label>
+                                <input type="text" class="form-input" id="certSigner" value="Prof. Marco Rossi" placeholder="Nome firmatario">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Ruolo Firmatario</label>
+                                <input type="text" class="form-input" id="certSignerRole" value="Direttore Didattico" placeholder="Es: Rettore">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Data Emissione</label>
+                            <input type="date" class="form-input" id="certDate">
+                        </div>
+                    </div>
+
+                    <div class="designer-section">
+                        <h3 class="section-title">Stile & Colori</h3>
+                        <div class="form-group">
+                            <label class="form-label">Template Base</label>
+                            <select class="form-input form-select" id="certTemplate">
+                                <option value="elegant">Elegante Classico</option>
+                                <option value="modern">Moderno Minimal</option>
+                                <option value="royal">Royal Premium</option>
+                                <option value="tech">Tech & Innovation</option>
+                                <option value="nature">Nature & Growth</option>
+                                <option value="gradient">Gradient Bold</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Colore Primario</label>
+                                <div class="color-input-wrap">
+                                    <input type="color" class="form-color" id="certColorPrimary" value="#6366F1">
+                                    <span class="color-value" id="colorPrimaryVal">#6366F1</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Colore Secondario</label>
+                                <div class="color-input-wrap">
+                                    <input type="color" class="form-color" id="certColorSecondary" value="#8B5CF6">
+                                    <span class="color-value" id="colorSecondaryVal">#8B5CF6</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Includi QR Code di Verifica</label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="certQR" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Includi Numero Certificato</label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="certNumber" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="designer-preview">
+                    <div class="preview-toolbar">
+                        <span class="preview-label">Anteprima Live</span>
+                        <div class="preview-actions">
+                            <button class="btn btn-sm btn-outline" onclick="CertDesigner.downloadPDF()">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v7M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                PDF
+                            </button>
+                        </div>
+                    </div>
+                    <div class="preview-container">
+                        <div class="certificate-preview" id="certificatePreview">
+                            <!-- Certificate rendered here by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== RECIPIENTS ==================== -->
+        <section class="page" id="page-recipients">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Destinatari</h1>
+                    <p class="page-subtitle">Gestisci la lista dei tuoi studenti</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-outline" onclick="Recipients.showImportModal()">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M5 7l3 3 3-3M2 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Importa CSV
+                    </button>
+                    <button class="btn btn-primary" onclick="Recipients.showAddModal()">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        Aggiungi
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-toolbar">
+                        <div class="search-box">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                            <input type="text" class="search-input" id="recipientSearch" placeholder="Cerca destinatario...">
+                        </div>
+                        <div class="table-actions">
+                            <span class="table-count" id="recipientCount">0 destinatari</span>
+                            <button class="btn btn-sm btn-ghost" id="selectAllBtn" onclick="Recipients.toggleSelectAll()">Seleziona Tutti</button>
+                            <button class="btn btn-sm btn-ghost text-danger" id="deleteSelectedBtn" onclick="Recipients.deleteSelected()" style="display:none">Elimina Selezionati</button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table" id="recipientsTable">
+                            <thead>
+                                <tr>
+                                    <th class="th-check"><input type="checkbox" id="checkAll" onchange="Recipients.toggleSelectAll()"></th>
+                                    <th>Nome Completo</th>
+                                    <th>Email</th>
+                                    <th>Corso</th>
+                                    <th>Data</th>
+                                    <th>Stato</th>
+                                    <th>Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recipientsBody">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="empty-state" id="recipientsEmpty">
+                        <div class="empty-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2" opacity="0.3"/><circle cx="20" cy="18" r="5" stroke="currentColor" stroke-width="2"/><path d="M10 38c0-5.5 4.5-10 10-10s10 4.5 10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M32 20l4 4 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <h3>Nessun destinatario</h3>
+                        <p>Aggiungi manualmente o importa un file CSV con i dati dei tuoi studenti.</p>
+                        <button class="btn btn-primary" onclick="Recipients.showAddModal()">Aggiungi Destinatario</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SEND ==================== -->
+        <section class="page" id="page-send">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Invia Certificati</h1>
+                    <p class="page-subtitle">Personalizza l'email e invia i certificati ai tuoi studenti</p>
+                </div>
+            </div>
+
+            <div class="send-layout">
+                <div class="send-config">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Configurazione Invio</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label">Design Certificato</label>
+                                <select class="form-input form-select" id="sendDesign">
+                                    <option value="">-- Seleziona un design salvato --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Destinatari</label>
+                                <select class="form-input form-select" id="sendRecipients">
+                                    <option value="all">Tutti i destinatari</option>
+                                    <option value="unsent">Solo non ancora inviati</option>
+                                    <option value="selected">Solo selezionati</option>
+                                </select>
+                                <span class="form-hint" id="sendRecipientsCount">0 destinatari selezionati</span>
+                            </div>
+
+                            <hr class="divider">
+
+                            <h4 class="subsection-title">Personalizzazione Email</h4>
+                            <div class="form-group">
+                                <label class="form-label">Oggetto Email</label>
+                                <input type="text" class="form-input" id="emailSubject" value="🎓 Congratulazioni! Il tuo certificato e' pronto">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Nome Mittente</label>
+                                <input type="text" class="form-input" id="emailSender" value="CertifyPro Academy">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Messaggio Personalizzato</label>
+                                <textarea class="form-input form-textarea" id="emailMessage" rows="4">Gentile {nome},
+
+siamo lieti di informarti che hai completato con successo il corso "{corso}". In allegato trovi il tuo certificato digitale.
+
+Puoi condividerlo direttamente su LinkedIn cliccando il pulsante qui sotto!</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Includi pulsante LinkedIn</label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="emailLinkedIn" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Includi pulsante di download PDF</label>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="emailPDF" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <button class="btn btn-primary btn-block" id="sendBtn" onclick="EmailSender.sendAll()">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8l12-6-3 12-3-5-6-1z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                                Invia Certificati
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="send-preview">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Anteprima Email</h3>
+                            <span class="badge badge-info">Preview</span>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="email-preview" id="emailPreview">
+                                <!-- Rendered by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== HISTORY ==================== -->
+        <section class="page" id="page-history">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Storico Invii</h1>
+                    <p class="page-subtitle">Tutti i certificati emessi e il loro stato</p>
+                </div>
+                <button class="btn btn-outline" onclick="History.exportCSV()">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 10V2M5 7l3 3 3-3M2 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Esporta CSV
+                </button>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-wrapper">
+                        <table class="data-table" id="historyTable">
+                            <thead>
+                                <tr>
+                                    <th>Destinatario</th>
+                                    <th>Corso</th>
+                                    <th>Template</th>
+                                    <th>Data Invio</th>
+                                    <th>Stato</th>
+                                    <th>Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyBody">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="empty-state" id="historyEmpty">
+                        <div class="empty-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="2" opacity="0.3"/><path d="M24 16v8l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                        <h3>Nessun invio effettuato</h3>
+                        <p>Qui troverai lo storico di tutti i certificati inviati.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CERTIFICATE PUBLIC VIEW ==================== -->
+        <section class="page" id="page-verify">
+            <div class="verify-container" id="verifyContainer">
+                <!-- Rendered by JS when viewing a specific certificate -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== MODALS ==================== -->
+
+    <!-- Add Recipient Modal -->
+    <div class="modal-overlay" id="modalAddRecipient">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Aggiungi Destinatario</h3>
+                <button class="modal-close" onclick="App.closeModal('modalAddRecipient')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Nome Completo *</label>
+                    <input type="text" class="form-input" id="addName" placeholder="Es: Mario Rossi" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email *</label>
+                    <input type="email" class="form-input" id="addEmail" placeholder="Es: mario@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Corso</label>
+                    <input type="text" class="form-input" id="addCourse" placeholder="Es: Web Development Avanzato">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Data Completamento</label>
+                    <input type="date" class="form-input" id="addDate">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="App.closeModal('modalAddRecipient')">Annulla</button>
+                <button class="btn btn-primary" onclick="Recipients.addRecipient()">Aggiungi</button>
+            </div>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Import CSV Modal -->
+    <div class="modal-overlay" id="modalImportCSV">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Importa da CSV</h3>
+                <button class="modal-close" onclick="App.closeModal('modalImportCSV')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="csv-upload-area" id="csvDropZone">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="8" y="6" width="32" height="36" rx="4" stroke="currentColor" stroke-width="2" opacity="0.4"/><path d="M18 20h12M18 26h12M18 32h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.4"/><circle cx="36" cy="36" r="10" fill="white" stroke="#6366F1" stroke-width="2"/><path d="M36 32v8M32 36h8" stroke="#6366F1" stroke-width="2" stroke-linecap="round"/></svg>
+                    <p class="csv-upload-text">Trascina il file CSV qui oppure</p>
+                    <label class="btn btn-outline btn-sm csv-upload-btn">
+                        Scegli File
+                        <input type="file" id="csvFileInput" accept=".csv" hidden>
+                    </label>
+                    <p class="csv-upload-hint">Formato: nome, email, corso, data (opzionale)</p>
+                </div>
+                <div class="csv-preview" id="csvPreview" style="display:none">
+                    <h4>Anteprima Import</h4>
+                    <div class="csv-preview-table" id="csvPreviewTable"></div>
+                    <p class="csv-preview-count" id="csvPreviewCount"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="App.closeModal('modalImportCSV')">Annulla</button>
+                <button class="btn btn-primary" id="csvImportBtn" onclick="Recipients.importCSV()" disabled>Importa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Send Progress Modal -->
+    <div class="modal-overlay" id="modalSendProgress">
+        <div class="modal modal-sm">
+            <div class="modal-body" style="text-align:center; padding: 40px 30px;">
+                <div class="send-progress-animation" id="sendProgressAnim">
+                    <div class="send-spinner"></div>
+                </div>
+                <h3 class="send-progress-title" id="sendProgressTitle">Invio in corso...</h3>
+                <p class="send-progress-text" id="sendProgressText">Preparazione certificati...</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="sendProgressBar" style="width: 0%"></div>
+                </div>
+                <p class="send-progress-count" id="sendProgressCount">0 / 0</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificate View Modal -->
+    <div class="modal-overlay" id="modalCertView">
+        <div class="modal modal-lg modal-cert">
+            <div class="modal-header">
+                <h3>Anteprima Certificato</h3>
+                <div class="modal-header-actions">
+                    <button class="btn btn-sm btn-outline" onclick="CertDesigner.downloadCurrentPDF()">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v7M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Scarica PDF
+                    </button>
+                    <button class="modal-close" onclick="App.closeModal('modalCertView')">&times;</button>
+                </div>
+            </div>
+            <div class="modal-body p-0">
+                <div class="cert-view-container" id="certViewContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="certificate-templates.js"></script>
+    <script src="email-linkedin.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
