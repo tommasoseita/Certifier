@@ -12,6 +12,83 @@
 var EmailSender = {
 
     /**
+     * Builds a self-contained HTML email body (inline styles, no external CSS)
+     * suitable for sending via Resend to real email clients.
+     *
+     * @param {string} recipientName  - e.g. "Mario Rossi"
+     * @param {string} recipientCourse - e.g. "Web Development Avanzato"
+     * @param {string} message        - Raw message with {nome}/{corso} placeholders
+     * @param {string} senderName     - Display name for the footer
+     * @param {boolean} showLinkedIn  - Whether to include LinkedIn button
+     * @param {boolean} showPDF       - Whether to include PDF button
+     * @param {string} linkedInUrl    - LinkedIn sharing URL
+     * @param {string} pdfUrl         - PDF download URL
+     * @returns {string} Full HTML email string
+     */
+    buildEmailHtml: function (recipientName, recipientCourse, message, senderName, showLinkedIn, showPDF, linkedInUrl, pdfUrl) {
+        var renderedMessage = (message || '')
+            .replace(/\{nome\}/g, escapeHtml(recipientName || ''))
+            .replace(/\{corso\}/g, escapeHtml(recipientCourse || ''));
+
+        var linkedInBtn = showLinkedIn
+            ? '<a href="' + escapeHtml(linkedInUrl || '#') + '" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:8px;background:#0A66C2;color:white;font-size:13px;font-weight:600;text-decoration:none;margin-bottom:10px;width:100%;max-width:320px;justify-content:center;box-sizing:border-box;">' +
+              '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>' +
+              'Condividi su LinkedIn</a>'
+            : '';
+
+        var pdfBtn = showPDF
+            ? '<a href="' + escapeHtml(pdfUrl || '#') + '" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:8px;background:#6366F1;color:white;font-size:13px;font-weight:600;text-decoration:none;width:100%;max-width:320px;justify-content:center;box-sizing:border-box;">' +
+              '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M5 7l3 3 3-3M2 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+              'Scarica Certificato PDF</a>'
+            : '';
+
+        var buttonsBlock = (showLinkedIn || showPDF)
+            ? '<div style="display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:0;">' + linkedInBtn + pdfBtn + '</div>'
+            : '';
+
+        var year = new Date().getFullYear();
+        var sender = escapeHtml(senderName || 'Wibo Certification');
+
+        return '<!DOCTYPE html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Il tuo certificato</title></head>' +
+            '<body style="margin:0;padding:0;background:#f3f4f6;font-family:Inter,Helvetica,Arial,sans-serif;">' +
+            '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f3f4f6;padding:24px 0;">' +
+              '<tr><td align="center">' +
+                '<table width="600" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff;border-radius:12px;overflow:hidden;max-width:600px;width:100%;">' +
+                  '<tr><td style="padding:32px 24px;">' +
+                    // Brand
+                    '<div style="text-align:center;margin-bottom:24px;">' +
+                      '<div style="width:48px;height:48px;margin:0 auto 8px;background:linear-gradient(135deg,#6366F1,#8B5CF6);border-radius:10px;display:inline-flex;align-items:center;justify-content:center;">' +
+                        '<svg width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M8 14.5L12 18.5L20 10.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+                      '</div>' +
+                      '<div style="font-size:16px;font-weight:700;color:#111827;">Wibo Certification</div>' +
+                    '</div>' +
+                    // Message
+                    '<p style="font-size:14px;color:#374151;line-height:1.7;white-space:pre-line;margin:0 0 24px;">' + renderedMessage + '</p>' +
+                    // Certificate mini preview
+                    '<div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:16px;margin-bottom:24px;">' +
+                      '<div style="background:linear-gradient(135deg,#6366F1,#8B5CF6);border-radius:6px;padding:24px 16px;text-align:center;color:white;position:relative;overflow:hidden;">' +
+                        '<div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;opacity:0.8;margin-bottom:8px;">Certificato di Completamento</div>' +
+                        '<div style="font-family:Georgia,serif;font-size:18px;font-weight:600;margin-bottom:4px;">' + escapeHtml(recipientName || '') + '</div>' +
+                        '<div style="font-size:11px;opacity:0.9;margin-bottom:6px;">ha completato con successo</div>' +
+                        '<div style="font-size:13px;font-weight:600;">' + escapeHtml(recipientCourse || '') + '</div>' +
+                        '<div style="margin-top:12px;font-size:9px;opacity:0.7;">Wibo Certification &nbsp;&bull;&nbsp; ' + new Date().toLocaleDateString('it-IT') + '</div>' +
+                      '</div>' +
+                    '</div>' +
+                    // Action buttons
+                    buttonsBlock +
+                  '</td></tr>' +
+                  // Footer
+                  '<tr><td style="padding:16px 24px 24px;border-top:1px solid #f3f4f6;text-align:center;">' +
+                    '<p style="font-size:11px;color:#9ca3af;line-height:1.6;margin:0;">Questa email è stata inviata da Wibo Certification per conto di ' + sender + '.<br>Se ritieni di aver ricevuto questa email per errore, puoi ignorarla in sicurezza.</p>' +
+                    '<p style="font-size:11px;color:#9ca3af;margin:8px 0 0;">&copy; ' + year + ' Wibo Certification. Tutti i diritti riservati.</p>' +
+                  '</td></tr>' +
+                '</table>' +
+              '</td></tr>' +
+            '</table>' +
+            '</body></html>';
+    },
+
+    /**
      * Renders a realistic email preview into #emailPreview.
      * Uses sample data for placeholders and reads form values from the send page.
      */
@@ -173,15 +250,28 @@ var EmailSender = {
 
         var total = toSend.length;
         var current = 0;
+        var failed = 0;
+
+        // Read email form values once before starting
+        var subject = (document.getElementById('emailSubject') || {}).value || 'Il tuo certificato';
+        var sender = (document.getElementById('emailSender') || {}).value || 'Wibo Certification';
+        var message = (document.getElementById('emailMessage') || {}).value || '';
+        var showLinkedIn = document.getElementById('emailLinkedIn') ? document.getElementById('emailLinkedIn').checked : true;
+        var showPDF = document.getElementById('emailPDF') ? document.getElementById('emailPDF').checked : true;
 
         /**
-         * Simulates sending one certificate at a time with a delay.
+         * Sends one certificate at a time via /api/send-email, then moves to the next.
          */
         function sendNext() {
             if (current >= total) {
-                // All done - show success state
-                if (progressTitle) progressTitle.textContent = 'Invio completato!';
-                if (progressText) progressText.textContent = 'Tutti i certificati sono stati inviati con successo.';
+                // All done - show final state
+                if (failed === 0) {
+                    if (progressTitle) progressTitle.textContent = 'Invio completato!';
+                    if (progressText) progressText.textContent = 'Tutti i certificati sono stati inviati con successo.';
+                } else {
+                    if (progressTitle) progressTitle.textContent = 'Invio completato con errori';
+                    if (progressText) progressText.textContent = (total - failed) + ' inviati, ' + failed + ' falliti.';
+                }
                 if (progressBar) progressBar.style.width = '100%';
                 if (progressCount) progressCount.textContent = total + ' / ' + total;
 
@@ -194,35 +284,36 @@ var EmailSender = {
                     '</div>';
                 }
 
-                // Mark recipients as sent in state and add to history
+                // Mark successfully sent recipients in state and add to history
                 var now = new Date();
                 for (var i = 0; i < toSend.length; i++) {
-                    var recipient = toSend[i];
-                    recipient.status = 'sent';
-                    recipient.sentDate = now.toISOString();
+                    var r = toSend[i];
+                    if (r._sendOk) {
+                        r.status = 'sent';
+                        r.sentDate = now.toISOString();
+                        delete r._sendOk;
 
-                    // Add history entry
-                    if (App.state && App.state.history) {
-                        App.state.history.unshift({
-                            id: 'hist-' + Date.now() + '-' + i,
-                            recipientName: recipient.name,
-                            recipientEmail: recipient.email,
-                            course: recipient.course || '',
-                            template: designName,
-                            designId: designSelect.value,
-                            sentAt: now.toISOString(),
-                            status: 'delivered'
-                        });
+                        if (App.state && App.state.history) {
+                            App.state.history.unshift({
+                                id: 'hist-' + Date.now() + '-' + i,
+                                recipientName: r.name,
+                                recipientEmail: r.email,
+                                course: r.course || '',
+                                template: designName,
+                                designId: designSelect.value,
+                                sentAt: now.toISOString(),
+                                status: 'delivered'
+                            });
+                        }
                     }
                 }
 
-                // Save state and update dashboard
                 if (typeof App.saveState === 'function') App.saveState();
                 if (typeof App.updateDashboard === 'function') App.updateDashboard();
 
-                App.toast(total + ' certificat' + (total === 1 ? 'o inviato' : 'i inviati') + ' con successo!', 'success');
+                var sent = total - failed;
+                App.toast(sent + ' certificat' + (sent === 1 ? 'o inviato' : 'i inviati') + ' con successo!', sent > 0 ? 'success' : 'error');
 
-                // Close modal after a delay
                 setTimeout(function () {
                     App.closeModal('modalSendProgress');
                 }, 2000);
@@ -238,13 +329,47 @@ var EmailSender = {
             if (progressCount) progressCount.textContent = current + ' / ' + total;
             if (progressText) progressText.textContent = 'Invio a ' + escapeHtml(recipient.name || recipient.email) + '...';
 
-            // Simulate network delay for each send (200-500ms)
-            var delay = 200 + Math.floor(Math.random() * 300);
-            setTimeout(sendNext, delay);
+            var emailHtml = EmailSender.buildEmailHtml(
+                recipient.name || '',
+                recipient.course || '',
+                message,
+                sender,
+                showLinkedIn,
+                showPDF,
+                null,
+                null
+            );
+
+            fetch('/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    to: recipient.email,
+                    toName: recipient.name || '',
+                    subject: subject,
+                    html: emailHtml,
+                    fromName: sender
+                })
+            })
+            .then(function (response) { return response.json(); })
+            .then(function (data) {
+                if (data.ok) {
+                    recipient._sendOk = true;
+                } else {
+                    failed++;
+                    console.error('Errore invio a ' + recipient.email + ':', data.error);
+                }
+                sendNext();
+            })
+            .catch(function (err) {
+                failed++;
+                console.error('Errore di rete per ' + recipient.email + ':', err);
+                sendNext();
+            });
         }
 
         // Start sending after a brief initial delay
-        setTimeout(sendNext, 600);
+        setTimeout(sendNext, 400);
     },
 
     /**
