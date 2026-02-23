@@ -5,8 +5,6 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 app.use(express.json({ limit: '10mb' }));
 app.use(express.static(__dirname));
 
@@ -22,6 +20,11 @@ app.post('/api/send-email', async (req, res) => {
         return res.status(400).json({ error: 'Campi obbligatori mancanti: to, subject, html' });
     }
 
+    if (!process.env.RESEND_API_KEY) {
+        return res.status(500).json({ error: 'RESEND_API_KEY non configurata sul server' });
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
     const from = `${fromName || 'Wibo Certification'} <noreply@certification.wibo.app>`;
     const recipient = toName ? `${toName} <${to}>` : to;
 
