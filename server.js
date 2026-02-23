@@ -22,7 +22,7 @@ app.post('/api/send-email', async (req, res) => {
         return res.status(400).json({ error: 'Campi obbligatori mancanti: to, subject, html' });
     }
 
-    const from = `${fromName || 'Wibo Certification'} <noreply@wibocertification.it>`;
+    const from = `${fromName || 'Wibo Certification'} <noreply@certification.wibo.app>`;
     const recipient = toName ? `${toName} <${to}>` : to;
 
     try {

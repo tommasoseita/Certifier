@@ -161,7 +161,7 @@ var EmailSender = {
             // Header bar with meta info
             '<div class="email-header-bar">' +
                 '<div class="email-meta">' +
-                    '<div><strong>Da:</strong> ' + escapeHtml(sender) + ' &lt;noreply@wibocertification.it&gt;</div>' +
+                    '<div><strong>Da:</strong> ' + escapeHtml(sender) + ' &lt;noreply@certification.wibo.app&gt;</div>' +
                     '<div><strong>A:</strong> ' + escapeHtml(sampleEmail) + '</div>' +
                     '<div><strong>Oggetto:</strong> ' + escapeHtml(subject) + '</div>' +
                 '</div>' +
