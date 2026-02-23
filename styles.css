@@ -957,8 +957,9 @@ input, select, textarea, button { font-family: inherit; }
 }
 
 .cert-logo {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     z-index: 1;
+    position: relative;
 }
 
 .cert-logo svg {
@@ -970,42 +971,52 @@ input, select, textarea, button { font-family: inherit; }
     font-family: var(--font-serif);
     font-size: 32px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     margin-bottom: 6px;
     z-index: 1;
+    text-transform: uppercase;
+    position: relative;
 }
 
 .cert-subtitle {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 400;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     z-index: 1;
+    opacity: 0.7;
+    position: relative;
 }
 
 .cert-recipient {
     font-family: var(--font-serif);
-    font-size: 36px;
+    font-size: 38px;
     font-weight: 600;
     margin-bottom: 8px;
     z-index: 1;
     word-break: break-word;
+    position: relative;
+    line-height: 1.2;
 }
 
 .cert-course {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     margin-bottom: 8px;
     z-index: 1;
+    letter-spacing: 0.5px;
+    position: relative;
 }
 
 .cert-description {
-    font-size: 12px;
-    max-width: 500px;
-    line-height: 1.7;
-    margin-bottom: 24px;
+    font-size: 11px;
+    max-width: 480px;
+    line-height: 1.8;
+    margin-bottom: 20px;
     z-index: 1;
+    opacity: 0.75;
+    position: relative;
 }
 
 .cert-footer {
@@ -1013,10 +1024,11 @@ input, select, textarea, button { font-family: inherit; }
     justify-content: space-between;
     align-items: flex-end;
     width: 100%;
-    max-width: 500px;
+    max-width: 520px;
     margin-top: auto;
-    padding-top: 16px;
+    padding-top: 14px;
     z-index: 1;
+    position: relative;
 }
 
 .cert-footer-item {
@@ -1026,22 +1038,27 @@ input, select, textarea, button { font-family: inherit; }
 
 .cert-signature-line {
     width: 120px;
-    height: 1px;
-    margin: 0 auto 6px;
+    height: 0;
+    border-top: 1px solid;
+    margin: 0 auto 8px;
+    opacity: 0.5;
 }
 
 .cert-signer-name {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
+    letter-spacing: 0.3px;
 }
 
 .cert-signer-role {
-    font-size: 10px;
-    opacity: 0.7;
+    font-size: 9.5px;
+    opacity: 0.6;
+    margin-top: 2px;
 }
 
 .cert-date {
     font-size: 11px;
+    font-weight: 500;
 }
 
 .cert-id {
@@ -1049,10 +1066,11 @@ input, select, textarea, button { font-family: inherit; }
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 9px;
-    opacity: 0.4;
+    font-size: 8.5px;
+    opacity: 0.35;
     font-family: 'SF Mono', 'Fira Code', monospace;
     z-index: 1;
+    letter-spacing: 0.5px;
 }
 
 .cert-qr {
@@ -1063,12 +1081,13 @@ input, select, textarea, button { font-family: inherit; }
 }
 
 .cert-org {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
     margin-bottom: 20px;
     z-index: 1;
     letter-spacing: 3px;
     text-transform: uppercase;
+    opacity: 0.7;
 }
 
 /* Decorative elements for templates */
@@ -1094,6 +1113,66 @@ input, select, textarea, button { font-family: inherit; }
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
+}
+
+/* Template-specific hover animations on preview */
+.certificate-preview:hover .cert {
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+}
+
+/* Elegant template enhancements */
+.cert-elegant .cert-title {
+    letter-spacing: 4px;
+}
+
+.cert-elegant .cert-recipient {
+    font-style: italic;
+}
+
+/* Royal template enhancements */
+.cert-royal .cert-footer .cert-signature-line {
+    opacity: 0.4;
+}
+
+.cert-royal .cert-signer-name,
+.cert-royal .cert-date {
+    color: #e8d5a0;
+}
+
+.cert-royal .cert-signer-role,
+.cert-royal .cert-org {
+    color: #c4b080;
+}
+
+/* Tech template enhancements */
+.cert-tech .cert-subtitle {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    letter-spacing: 3px;
+}
+
+.cert-tech .cert-signer-name,
+.cert-tech .cert-date {
+    color: #94a3b8;
+}
+
+.cert-tech .cert-signer-role,
+.cert-tech .cert-org {
+    color: #64748b;
+}
+
+/* Nature template enhancements */
+.cert-nature .cert-title {
+    letter-spacing: 3px;
+}
+
+.cert-nature .cert-subtitle {
+    color: #4d7c0f;
+}
+
+/* Gradient template glassmorphism */
+.cert-gradient .cert-recipient {
+    font-size: 34px;
 }
 
 /* ========================================
