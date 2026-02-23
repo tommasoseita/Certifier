@@ -1,5 +1,5 @@
 /* ============================================================
-   CertifyPro - app.js
+   Wibo Certification - app.js
    Logica principale dell'applicazione: routing, stato, UI,
    destinatari, storico, template gallery.
    ============================================================ */
@@ -31,7 +31,7 @@ function generateCertNumber() {
 // ────────────────────────────────────────────────────────────
 var App = {
 
-    STORAGE_KEY: 'certifypro_state',
+    STORAGE_KEY: 'wibocertification_state',
 
     state: {
         recipients: [],
@@ -975,7 +975,7 @@ var History = {
 
         var link = document.createElement('a');
         link.setAttribute('href', url);
-        link.setAttribute('download', 'certifypro_storico_' + new Date().toISOString().split('T')[0] + '.csv');
+        link.setAttribute('download', 'wibocertification_storico_' + new Date().toISOString().split('T')[0] + '.csv');
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
