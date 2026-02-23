@@ -818,6 +818,30 @@ var CertDesigner = {
         var data = this._readFormData();
         try {
             localStorage.setItem('wibocertification_design', JSON.stringify(data));
+
+            // Sync into App.state.designs so the send page dropdown can find it
+            if (typeof App !== 'undefined' && App.state) {
+                var designName = data.title || 'Design';
+                var existingIdx = -1;
+                for (var i = 0; i < App.state.designs.length; i++) {
+                    if (App.state.designs[i].name === designName) {
+                        existingIdx = i;
+                        break;
+                    }
+                }
+                var entry = {
+                    id: existingIdx >= 0 ? App.state.designs[existingIdx].id : ('design-' + Date.now()),
+                    name: designName,
+                    data: data
+                };
+                if (existingIdx >= 0) {
+                    App.state.designs[existingIdx] = entry;
+                } else {
+                    App.state.designs.push(entry);
+                }
+                App.saveState();
+            }
+
             this._showToast('Design saved successfully!');
         } catch (e) {
             this._showToast('Failed to save design.');
