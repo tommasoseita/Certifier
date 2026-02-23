@@ -1,6 +1,6 @@
 /* ========================================
    EMAIL & LINKEDIN SHARING MODULE
-   CertifyPro - Piattaforma Certificati Digitali
+   Wibo Certification - Piattaforma Certificati Digitali
    ======================================== */
 
 // NOTE: escapeHtml() is defined in certificate-templates.js (loaded before this file).
@@ -20,7 +20,7 @@ var EmailSender = {
         if (!previewEl) return;
 
         var subject = (document.getElementById('emailSubject') || {}).value || '';
-        var sender = (document.getElementById('emailSender') || {}).value || 'CertifyPro';
+        var sender = (document.getElementById('emailSender') || {}).value || 'Wibo Certification';
         var message = (document.getElementById('emailMessage') || {}).value || '';
         var showLinkedIn = document.getElementById('emailLinkedIn') ? document.getElementById('emailLinkedIn').checked : true;
         var showPDF = document.getElementById('emailPDF') ? document.getElementById('emailPDF').checked : true;
@@ -73,7 +73,7 @@ var EmailSender = {
                 '<div style="font-size: 11px; opacity: 0.9; margin-bottom: 6px;">ha completato con successo</div>' +
                 '<div style="font-size: 13px; font-weight: 600;">' + escapeHtml(sampleCourse) + '</div>' +
                 '<div style="margin-top: 12px; display: flex; justify-content: center; gap: 24px; font-size: 9px; opacity: 0.7;">' +
-                    '<span>CertifyPro Academy</span>' +
+                    '<span>Wibo Certification</span>' +
                     '<span>' + new Date().toLocaleDateString('it-IT') + '</span>' +
                 '</div>' +
             '</div>' +
@@ -84,7 +84,7 @@ var EmailSender = {
             // Header bar with meta info
             '<div class="email-header-bar">' +
                 '<div class="email-meta">' +
-                    '<div><strong>Da:</strong> ' + escapeHtml(sender) + ' &lt;noreply@certifypro.it&gt;</div>' +
+                    '<div><strong>Da:</strong> ' + escapeHtml(sender) + ' &lt;noreply@wibocertification.it&gt;</div>' +
                     '<div><strong>A:</strong> ' + escapeHtml(sampleEmail) + '</div>' +
                     '<div><strong>Oggetto:</strong> ' + escapeHtml(subject) + '</div>' +
                 '</div>' +
@@ -98,7 +98,7 @@ var EmailSender = {
                             '<path d="M8 14.5L12 18.5L20 10.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>' +
                         '</svg>' +
                     '</div>' +
-                    '<div class="email-brand-name">CertifyPro</div>' +
+                    '<div class="email-brand-name">Wibo Certification</div>' +
                 '</div>' +
                 // Greeting / message
                 '<div class="email-greeting">' + escapeHtml(renderedMessage) + '</div>' +
@@ -109,9 +109,9 @@ var EmailSender = {
             '</div>' +
             // Footer
             '<div class="email-footer-content">' +
-                '<p>Questa email è stata inviata da CertifyPro per conto di ' + escapeHtml(sender) + '.<br>' +
+                '<p>Questa email è stata inviata da Wibo Certification per conto di ' + escapeHtml(sender) + '.<br>' +
                 'Se ritieni di aver ricevuto questa email per errore, puoi ignorarla in sicurezza.</p>' +
-                '<p style="margin-top: 8px;">&copy; ' + new Date().getFullYear() + ' CertifyPro. Tutti i diritti riservati.</p>' +
+                '<p style="margin-top: 8px;">&copy; ' + new Date().getFullYear() + ' Wibo Certification. Tutti i diritti riservati.</p>' +
             '</div>' +
         '</div>';
 
@@ -396,7 +396,7 @@ var LinkedInShare = {
 
         var addToProfileUrl = 'https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME' +
             '&name=' + encodeURIComponent(data.certName || '') +
-            '&organizationName=' + encodeURIComponent(data.orgName || 'CertifyPro') +
+            '&organizationName=' + encodeURIComponent(data.orgName || 'Wibo Certification') +
             '&issueYear=' + issueYear +
             '&issueMonth=' + issueMonth +
             '&certUrl=' + encodeURIComponent(certUrl) +

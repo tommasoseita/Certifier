@@ -1,5 +1,5 @@
 /**
- * CertifyPro - Certificate Template Engine
+ * Wibo Certification - Certificate Template Engine
  * A full-featured certificate designer with 6 templates, live preview,
  * QR code generation, and export capabilities.
  */
@@ -740,7 +740,7 @@ var CertDesigner = {
             recipientName: val('certRecipient', 'Recipient Name') || 'Recipient Name',
             courseName: val('certCourse', ''),
             description: val('certDescription', ''),
-            organization: val('certOrg', 'CertifyPro'),
+            organization: val('certOrg', 'Wibo Certification'),
             signerName: val('certSigner', ''),
             signerRole: val('certSignerRole', ''),
             date: val('certDate', new Date().toLocaleDateString()),
@@ -817,7 +817,7 @@ var CertDesigner = {
     saveDesign: function () {
         var data = this._readFormData();
         try {
-            localStorage.setItem('certifypro_design', JSON.stringify(data));
+            localStorage.setItem('wibocertification_design', JSON.stringify(data));
             this._showToast('Design saved successfully!');
         } catch (e) {
             this._showToast('Failed to save design.');
@@ -826,7 +826,7 @@ var CertDesigner = {
 
     _restoreFromStorage: function () {
         try {
-            var raw = localStorage.getItem('certifypro_design');
+            var raw = localStorage.getItem('wibocertification_design');
             if (!raw) return;
 
             var saved = JSON.parse(raw);
@@ -872,7 +872,7 @@ var CertDesigner = {
             certSubtitle: 'This certificate is proudly presented to',
             certCourse: '',
             certDescription: '',
-            certOrg: 'CertifyPro',
+            certOrg: 'Wibo Certification',
             certSigner: '',
             certSignerRole: '',
             certDate: '',
@@ -898,7 +898,7 @@ var CertDesigner = {
 
         // Clear saved data
         try {
-            localStorage.removeItem('certifypro_design');
+            localStorage.removeItem('wibocertification_design');
         } catch (e) {
             // ignore
         }
@@ -933,7 +933,7 @@ var CertDesigner = {
 
     _showToast: function (message) {
         // Remove any existing toast
-        var existing = document.getElementById('certifypro-toast');
+        var existing = document.getElementById('wibocertification-toast');
         if (existing) {
             existing.remove();
         }
@@ -943,7 +943,7 @@ var CertDesigner = {
         }
 
         var toast = document.createElement('div');
-        toast.id = 'certifypro-toast';
+        toast.id = 'wibocertification-toast';
         toast.textContent = message;
         toast.setAttribute('role', 'status');
         toast.setAttribute('aria-live', 'polite');
@@ -995,7 +995,7 @@ var CertDesigner = {
             recipientName: 'Mario Rossi',
             courseName: 'Web Development',
             description: '',
-            organization: 'CertifyPro Academy',
+            organization: 'Wibo Certification',
             signerName: 'Prof. Marco Rossi',
             signerRole: 'Director',
             date: new Date().toLocaleDateString(),
